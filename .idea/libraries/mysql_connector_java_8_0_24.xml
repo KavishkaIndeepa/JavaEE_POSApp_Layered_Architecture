@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="mysql-connector-java-8.0.24">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Documents/Libries/mysql-connector-java-8.0.24.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Libries/commons-pool2-2.11.1.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Libries/commons-logging-1.2.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Libries/commons-dbcp2-2.10.0.jar!/" />
+      <root url="file://$USER_HOME$/Documents/Libries/Jasper-lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Documents/Libries/Jasper-lib" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Documents/Libries/Jasper-lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Documents/Libries/Jasper-lib" recursive="false" type="SOURCES" />
+  </library>
+</component>

@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="aad">
+    <output-path>$PROJECT_DIR$/out/artifacts/aad</output-path>
+    <root id="archive" name="aad.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BackEnd" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="DBCP" />
+          <element id="library" level="project" name="json-p" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.24" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
