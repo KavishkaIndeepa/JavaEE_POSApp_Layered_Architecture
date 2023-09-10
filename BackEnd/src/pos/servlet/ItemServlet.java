@@ -1,5 +1,8 @@
 package pos.servlet;
 
+import pos.bo.BOFactory;
+import pos.bo.custom.ItemBO;
+import pos.dto.ItemDTO;
 import pos.util.ResponseUtil;
 
 import javax.json.*;
@@ -9,39 +12,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.*;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/pages/item"})
 public class ItemServlet extends HttpServlet {
 
+    private ItemBO itemBO;
+
+    @Override
+    public void init() throws ServletException {
+        itemBO = (ItemBO) BOFactory.getBoFactory().getBoType(BOFactory.BoType.Item);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
-            PreparedStatement pstm=connection.prepareStatement("select *from item");
-            ResultSet rst=pstm.executeQuery();
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
+//            PreparedStatement pstm=connection.prepareStatement("select *from item");
+//            ResultSet rst=pstm.executeQuery();
+
+            List<ItemDTO> allItem = itemBO.getAllItem();
 
             resp.addHeader("Content-Type", "application/json");
             resp.addHeader("Access-Control-Allow-Origin","*");
 
             JsonArrayBuilder allItems= Json.createArrayBuilder();
 
-            while ((rst.next())){
-                String code =rst.getString(1);
-                String description =rst.getString(2);
-                String qtyOnHand=rst.getString(3);
-                String unitPrice=rst.getString(4);
-
+            for (ItemDTO dto:allItem) {
                 JsonObjectBuilder itemBuilder=Json.createObjectBuilder();
-                itemBuilder.add("code",code);
-                itemBuilder.add("description",description);
-                itemBuilder.add("qtyOnHand",qtyOnHand);
-                itemBuilder.add("unitPrice",unitPrice);
+
+                itemBuilder.add("code",dto.getCode());
+                itemBuilder.add("description",dto.getDescription());
+                itemBuilder.add("qtyOnHand",dto.getQtyOnHand());
+                itemBuilder.add("unitPrice",dto.getUnitPrice());
                 allItems.add(itemBuilder.build());
-
-
             }
+
+            resp.setContentType("application/json");
             resp.getWriter().print(ResponseUtil.genJson("Success", "Loaded", allItems.build()));
 
         } catch (ClassNotFoundException e) {
@@ -55,25 +65,31 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String code=req.getParameter("itemCode");
-        String description=req.getParameter("itemName");
-        String qtyOnHand= req.getParameter("itemQty");
-        String unitPrice= req.getParameter("itemPrice");
+//        String code=req.getParameter("itemCode");
+//        String description=req.getParameter("itemName");
+//        String qtyOnHand= req.getParameter("itemQty");
+//        String unitPrice= req.getParameter("itemPrice");
+
+        resp.setContentType("application/json");
 
         resp.addHeader("Content-Type", "application/json");
         resp.addHeader("Access-Control-Allow-Origin","*");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
-            PreparedStatement pstm=connection.prepareStatement("insert into item values (?,?,?,?)");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
+//            PreparedStatement pstm=connection.prepareStatement("insert into item values (?,?,?,?)");
+            String code=req.getParameter("itemCode");
+            String description=req.getParameter("itemName");
+            String qtyOnHand= req.getParameter("itemQty");
+            String unitPrice= req.getParameter("itemPrice");
 
-            pstm.setObject(1, code);
-            pstm.setObject(2, description);
-            pstm.setObject(3, qtyOnHand);
-            pstm.setObject(4, unitPrice);
+//            pstm.setObject(1, code);
+//            pstm.setObject(2, description);
+//            pstm.setObject(3, qtyOnHand);
+//            pstm.setObject(4, unitPrice);
 
-            if (pstm.executeUpdate() > 0){
+            if (itemBO.saveItem(new ItemDTO(code, description, qtyOnHand, unitPrice))){
 //                JsonObjectBuilder objectBuilder=Json.createObjectBuilder();
 //                objectBuilder.add("state","OK");
 //                objectBuilder.add("message","Successfully Added ");
@@ -105,23 +121,23 @@ public class ItemServlet extends HttpServlet {
 
         String code=customerObject.getString("code");
         String description = customerObject.getString("description");
-        String qtyOnHand =customerObject.getString("qtyOnHand");
-        String unitPrice =customerObject.getString("unitPrice");
+        String qtyOnHand = customerObject.getString("qtyOnHand");
+        String unitPrice = customerObject.getString("unitPrice");
 
         resp.addHeader("Content-Type", "application/json");
         resp.addHeader("Access-Control-Allow-Origin","*");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
-            PreparedStatement pstm2=connection.prepareStatement("update item set description=? ,qtyOnHand=?, unitPrice=? where code=?");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
+//            PreparedStatement pstm2=connection.prepareStatement("update item set description=? ,qtyOnHand=?, unitPrice=? where code=?");
+//
+//            pstm2.setObject(4,code);
+//            pstm2.setObject(1,description);
+//            pstm2.setObject(2,qtyOnHand);
+//            pstm2.setObject(3,unitPrice);
 
-            pstm2.setObject(4,code);
-            pstm2.setObject(1,description);
-            pstm2.setObject(2,qtyOnHand);
-            pstm2.setObject(3,unitPrice);
-
-            if (pstm2.executeUpdate() > 0){
+            if (itemBO.updateItem(new ItemDTO(code,description,qtyOnHand,unitPrice))){
 //                JsonObjectBuilder objectBuilder=Json.createObjectBuilder();
 //                objectBuilder.add("state","OK");
 //                objectBuilder.add("message","Successfully Added ");
@@ -148,6 +164,7 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
         String code=req.getParameter("code");
 
 
@@ -155,14 +172,14 @@ public class ItemServlet extends HttpServlet {
         resp.addHeader("Access-Control-Allow-Origin","*");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
-            PreparedStatement pstm3=connection.prepareStatement("delete from item where code=?");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
+//            PreparedStatement pstm3=connection.prepareStatement("delete from item where code=?");
+//
+//            pstm3.setObject(1, code);
 
-            pstm3.setObject(1, code);
 
-
-            if (pstm3.executeUpdate() > 0){
+            if (itemBO.deleteItem(code)){
 //                JsonObjectBuilder objectBuilder=Json.createObjectBuilder();
 //                objectBuilder.add("state","OK");
 //                objectBuilder.add("message","Successfully Added ");

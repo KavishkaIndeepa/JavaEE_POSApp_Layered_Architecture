@@ -3,12 +3,12 @@ package pos.entity;
 import java.math.BigDecimal;
 
 public class Item {
-    String code;
-    String description;
-    int qtyOnHand;
-    BigDecimal unitPrice;
+    private String code;
+    private String description;
+    private String qtyOnHand;
+    private String unitPrice;
 
-    public Item(String code, String description, int qtyOnHand, BigDecimal unitPrice) {
+    public Item(String code, String description, String qtyOnHand, String unitPrice) {
         this.code = code;
         this.description = description;
         this.qtyOnHand = qtyOnHand;
@@ -26,11 +26,11 @@ public class Item {
         return description;
     }
 
-    public int getQtyOnHand() {
+    public String getQtyOnHand() {
         return qtyOnHand;
     }
 
-    public BigDecimal getUnitPrice() {
+    public String getUnitPrice() {
         return unitPrice;
     }
 
@@ -42,11 +42,11 @@ public class Item {
         this.description = description;
     }
 
-    public void setQtyOnHand(int qtyOnHand) {
+    public void setQtyOnHand(String qtyOnHand) {
         this.qtyOnHand = qtyOnHand;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(String unitPrice) {
         this.unitPrice = unitPrice;
     }
 }

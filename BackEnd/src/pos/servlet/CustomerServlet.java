@@ -99,7 +99,7 @@ public class CustomerServlet extends HttpServlet {
 
 
 
-        }catch (SQLException e){
+        }catch (SQLException | ClassNotFoundException e){
 //            JsonObjectBuilder objectBuilder=Json.createObjectBuilder();
 //            objectBuilder.add("state","Error");
 //            objectBuilder.add("message",e.getMessage());

@@ -6,7 +6,7 @@ public class PurchaseOrder {
     String oid;
     String code;
     int qty;
-    BigDecimal unitPrice;
+    double unitPrice;
 
     public String getOid() {
         return oid;
@@ -20,7 +20,7 @@ public class PurchaseOrder {
         return qty;
     }
 
-    public BigDecimal getUnitPrice() {
+    public double getUnitPrice() {
         return unitPrice;
     }
 
@@ -36,14 +36,14 @@ public class PurchaseOrder {
         this.qty = qty;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
     public PurchaseOrder() {
     }
 
-    public PurchaseOrder(String oid, String code, int qty, BigDecimal unitPrice) {
+    public PurchaseOrder(String oid, String code, int qty, double unitPrice) {
         this.oid = oid;
         this.code = code;
         this.qty = qty;

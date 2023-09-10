@@ -1,6 +1,7 @@
 package pos.dao.custom.impl;
 
 import pos.dao.custom.CustomerDAO;
+import pos.db.DbConnection;
 import pos.entity.Customer;
 import pos.util.CrudUtil;
 
@@ -10,7 +11,7 @@ import java.sql.*;
 public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean save(Customer obj) {
-        try( Connection connection = DBConnection.getDbConnection().getConnection()) {
+        try( Connection connection = DbConnection.getDbConnection().getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO customer VALUES (?,?,?)");
             pstm.setString(1,obj.getId());
             pstm.setString(2,obj.getName());
@@ -25,7 +26,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public ResultSet getAll() throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
+        Connection connection = DbConnection.getDbConnection().getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
         return resultSet;

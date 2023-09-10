@@ -1,6 +1,7 @@
 package pos.bo;
 
 import pos.bo.custom.impl.CustomerBOImpl;
+import pos.bo.custom.impl.ItemBOIml;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -15,12 +16,14 @@ public class BOFactory {
         return boFactory;
     }
     public enum BoType{
-        Customer
+        Customer,Item
     }
     public SuperBO getBoType(BOFactory.BoType boType){
         switch (boType){
             case Customer:
                 return (SuperBO) new CustomerBOImpl();
+            case Item:
+                return (SuperBO) new ItemBOIml();
         }
         return null;
     }
