@@ -8,6 +8,15 @@ public class PurchaseOrderDTO {
     String code;
     int qty;
     double unitPrice;
+    double buyQty;
+
+    public void setBuyQty(double buyQty) {
+        this.buyQty = buyQty;
+    }
+
+    public double getBuyQty() {
+        return buyQty;
+    }
 
     public String getOid() {
         return oid;
@@ -44,11 +53,12 @@ public class PurchaseOrderDTO {
     public PurchaseOrderDTO() {
     }
 
-    public PurchaseOrderDTO(String oid, String code, int qty, double unitPrice) {
+    public PurchaseOrderDTO(String oid, String code, int qty, double unitPrice, double buyQty) {
         this.oid = oid;
         this.code = code;
         this.qty = qty;
         this.unitPrice = unitPrice;
+        this.buyQty = buyQty;
     }
 
 

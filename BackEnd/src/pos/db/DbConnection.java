@@ -14,8 +14,8 @@ public class DbConnection {
         dataSource.setUrl("jdbc:mysql://localhost:3306/samadhi");
         dataSource.setPassword("1234");
         dataSource.setUsername("root");
-        dataSource.setMaxTotal(500);
-        dataSource.setInitialSize(500);
+        dataSource.setMaxTotal(20);
+        dataSource.setInitialSize(20);
         Connection connection=dataSource.getConnection();
     }
 

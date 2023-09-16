@@ -2,6 +2,7 @@ function getAllCustomer() {
     $("#tblCustomer").empty();
     $.ajax({
         url:"http://localhost:8080/aad/pages/customer",
+        dataType :"json",
         success : function (response){
             let customer = response.data;
             console.log(customer);
@@ -36,6 +37,7 @@ $("#btnCustomer").click(function (){
         url: "http://localhost:8080/aad/pages/customer",
         method:"POST",
         data : formData,
+        dataType :"json",
         success:function (res){
             getAllCustomer();
             alert(

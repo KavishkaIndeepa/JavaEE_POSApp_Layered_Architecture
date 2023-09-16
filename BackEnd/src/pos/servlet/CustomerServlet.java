@@ -22,13 +22,15 @@ public class CustomerServlet extends HttpServlet {
     private CustomerBO customerBO;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+    public void init() throws ServletException {
+        super.init();
         customerBO= (CustomerBO) BOFactory.getBoFactory().getBoType(BOFactory.BoType.Customer);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addHeader("Content-Type", "application/json");
+        resp.addHeader("Access-Control-Allow-Origin","*");
         try {
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/samadhi", "root", "1234");
@@ -37,8 +39,7 @@ public class CustomerServlet extends HttpServlet {
 
             List<CustomerDTo> allCustomer = customerBO.getAllCustomer();
 
-            resp.addHeader("Content-Type", "application/json");
-            resp.addHeader("Access-Control-Allow-Origin","*");
+
 
             JsonArrayBuilder allCus= Json.createArrayBuilder();
 

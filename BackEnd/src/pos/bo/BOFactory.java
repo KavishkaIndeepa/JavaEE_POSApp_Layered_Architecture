@@ -2,6 +2,7 @@ package pos.bo;
 
 import pos.bo.custom.impl.CustomerBOImpl;
 import pos.bo.custom.impl.ItemBOIml;
+import pos.bo.custom.impl.PurchaseOrderBOImpl;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -16,7 +17,7 @@ public class BOFactory {
         return boFactory;
     }
     public enum BoType{
-        Customer,Item
+        Customer,Item,PurchaseOrder
     }
     public SuperBO getBoType(BOFactory.BoType boType){
         switch (boType){
@@ -24,6 +25,8 @@ public class BOFactory {
                 return (SuperBO) new CustomerBOImpl();
             case Item:
                 return (SuperBO) new ItemBOIml();
+            case PurchaseOrder:
+                return (SuperBO) new PurchaseOrderBOImpl();
         }
         return null;
     }

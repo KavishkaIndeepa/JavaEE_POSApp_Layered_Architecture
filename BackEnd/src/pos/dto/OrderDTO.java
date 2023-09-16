@@ -13,7 +13,7 @@ public class OrderDTO {
         CusId = cusId;
     }
 
-    public OrderDTO() {
+    public OrderDTO(String oid, String date, String cusId) {
     }
 
     public String getOrderId() {

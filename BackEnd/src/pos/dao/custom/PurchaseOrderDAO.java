@@ -1,4 +1,7 @@
 package pos.dao.custom;
 
-public interface PurchaseOrderDAO {
+import pos.dao.CrudDAO;
+import pos.entity.PurchaseOrder;
+
+public interface PurchaseOrderDAO extends CrudDAO<PurchaseOrder> {
 }
